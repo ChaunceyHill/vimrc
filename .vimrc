@@ -12,9 +12,12 @@
 au BufRead,BufNewFile *.py set foldmethod=indent
 
 "Comment or uncomment a line in python
-au Bufread,BufNewFile *.py :noremap <leader>c mg0i#<Esc>'g
-au Bufread,BufNewFile *.py :noremap <leader>C mg0li<BS><ESC>'g
+au Bufread,BufNewFile *.py :noremap <leader>c mg <bar> 0i#<Esc> <bar>`g
+au Bufread,BufNewFile *.py :noremap <leader>C mg <bar> 0li<BS><ESC><bar> `g
 
+" Execute current file, leader r. leader R to save first
+au Bufread,BufNewFile *.py :noremap <leader>r :!python % <CR>
+au Bufread,BufNewFile *.py :noremap <leader>R :w <CR> :!python % <CR>
 " -----------------------------------------------------------
 " spacing
 " -----------------------------------------------------------
@@ -30,28 +33,31 @@ set autoindent
 " -----------------------------------------------------------
 
 syntax on
-"set number
-set relativenumber
+set number
+"set relativenumber
 set showmatch
 set cursorline
 set fileformat=unix
 
 " -----------------------------------------------------------
-" commands
+" normal mode remaps
 " -----------------------------------------------------------
 
 " edit vim config in split screen
 :nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" toggle folds with space instead of za
-" undo all folds in a file with shift space
-" also, modify the fold level 
-:nnoremap space> za
-:nnoremap s-space> zR
-:nnoremap space>k zm
-:nnoremap space>j zr
+" toggle folds with space instead of za undo all folds in a file with leader space
+:nnoremap <space> za
+:nnoremap <leader><space> zR
 
-" wrap current word in parenthesis
-" :nnoremap <leader>9 mg|bi(<Esc>wwi)<Esc>|`g
+" Wrap a word in parenthesis leader 9 or leader 0 to insert at beggining
+:nnoremap <leader>9 bi(<Esc>ea)<Esc>
+:nnoremap <leader>0 ea)<Esc>bi(<Esc>i
 
+" Easier window switching
+:nnoremap <leader>ww <C-W><C-W>
+:nnoremap <leader>wh <C-W><C-H>
+:nnoremap <leader>wj <C-W><C-J>
+:nnoremap <leader>wk <C-W><C-K>
+:nnoremap <leader>wl <C-W><C-L>
