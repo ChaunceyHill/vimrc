@@ -7,17 +7,29 @@
 " Python settings
 " -----------------------------------------------------------
 
-"indents and folding
-"au BufRead,BufNewFile *.py set expandtab
+" indents and folding
+" au BufRead,BufNewFile *.py set expandtab
 au BufRead,BufNewFile *.py set foldmethod=indent
 
-"Comment or uncomment a line in python
+" Comment or uncomment a line in python
 au Bufread,BufNewFile *.py :noremap <leader>c mg <bar> 0i#<Esc> <bar>`g
 au Bufread,BufNewFile *.py :noremap <leader>C mg <bar> 0li<BS><ESC><bar> `g
 
 " Execute current file, leader r. leader R to save first
 au Bufread,BufNewFile *.py :noremap <leader>r :!python % <CR>
 au Bufread,BufNewFile *.py :noremap <leader>R :w <CR> :!python % <CR>
+" -----------------------------------------------------------
+" general  settings 
+" -----------------------------------------------------------
+
+syntax on
+set number
+" set relativenumber
+set showmatch
+set cursorline
+set fileformat=unix
+colorscheme murphy
+
 " -----------------------------------------------------------
 " spacing
 " -----------------------------------------------------------
@@ -29,15 +41,12 @@ set shiftwidth=4
 set autoindent
 
 " -----------------------------------------------------------
-" general  settings 
+" insert mode remaps
 " -----------------------------------------------------------
 
-syntax on
-set number
-"set relativenumber
-set showmatch
-set cursorline
-set fileformat=unix
+" return to normal mode faster
+imap kj <Esc>
+imap jk <Esc>
 
 " -----------------------------------------------------------
 " normal mode remaps
@@ -61,3 +70,8 @@ set fileformat=unix
 :nnoremap <leader>wj <C-W><C-J>
 :nnoremap <leader>wk <C-W><C-K>
 :nnoremap <leader>wl <C-W><C-L>
+
+" Save the current session (all windows) to reopen next time you use Vim leader s
+" use vim -S to open session next time
+:nnoremap <leader>s :mksession<CR>
+:nnoremap <leader>S :mksession!<CR>
